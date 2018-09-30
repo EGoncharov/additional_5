@@ -1,21 +1,26 @@
 module.exports = function check(str, bracketsConfig) {
-  
-  var arrayOne = str.split('');
-  var arrayTwo = [];
-  
-  for (var i=0; i<arrayOne.length; i++) {
-    for (var x=0; x<bracketsConfig.length; x++) {
-      if (arrayOne[i] === bracketsConfig[x][0]) {
-        arrayTwo.push(arrayOne[i])}
-      if (arrayOne[i] === bracketsConfig[x][i] && arrayTwo[arrayTwo.length-1] === bracketsConfig[x][0]) {
-        arrayTwo.pop()
+  var arr = str.split("");
+  var arr1 = [];
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < bracketsConfig.length; j++) {
+      if (arr[i] === bracketsConfig[j][1]
+        && arr1[arr1.length - 1] === bracketsConfig[j][0]) {
+            arr1.pop();
+            break;
+      } else if (arr[i] === bracketsConfig[j][0]) {
+            arr1.push(arr[i]);
+            break;
+      } else if (arr[i] === bracketsConfig[j][1]
+            && (arr1.length === 0 || arr1[arr1.length - 1] !== bracketsConfig[j][0])) {
+                return false;
       }
     }
   }
-  if (arrayTwo.length == 0) {
-    return true;
-  } else {
-    return false;
+
+  if (arr1.length == 0) {
+        return true;
   }
-      
+  else {
+        return false;
+  }     
 }
